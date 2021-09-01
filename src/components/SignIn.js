@@ -29,72 +29,38 @@ function SignIn(props) {
     const [userInfo, setUserInfo] = useState([]);
 
     useEffect(() => {
+        GoogleSignin.configure({
+            webClientId: '688579938286-9akgmcg4vapp4p9i0s6vmcgga2uq5291.apps.googleusercontent.com'
+        });
 
         props.resetRedux();
     }, []);
 
     const onGoogleButtonPress = async () => {
         try {
-            await GoogleSignin.hasPlayServices();
+            navigation.navigate('Tasks')
+
+            // await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             if (userInfo) {
                 const { accessToken } = await GoogleSignin.getTokens();
+
             }
         }
-        catch (err){}
-        // await UserService.onGoogleButtonPress();
-        //signin with google
-        // try {
-        //     //   await GoogleSignin.hasPlayServices();
-        //     console.log(
-        //         'sigin'
-        //     );
-        //     await GoogleSignin.hasPlayServices();
-        //     const userInfo = await GoogleSignin.signIn();
-        //     setUserInfo(userInfo)
-        // }
-        // catch (error) {
-        //     debugger
-        //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        //         // user cancelled the login flow
-        //     } else if (error.code === statusCodes.IN_PROGRESS) {
-        //         // operation (e.g. sign in) is in progress already
-        //     } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        //         // play services not available or outdated
-        //     } else {
-        //         // some other error happened
-        //     }
-
-        // }
+        catch (err) { }
     }
 
     return (
         <>
-            {/* <Button
-                title='Go to tasks screen'
-                onPress={() => {
-                    props.resetRedux();
-                    navigation.navigate('Tasks')
-                }}
-            >
-            </Button> */}
-
-            <View style={{
-                alignSelf: 'center',
-                justifyContent: 'center',
-                height: Dimensions.get('window').height - 100,
-            }}>
+            <View style={styles.view}>
                 <Text style={{ margin: 5 }}>Sign In with google </Text>
                 <GoogleSigninButton
-                    style={{ width: 192, height: 48, alignSelf: 'center' }}
+                    style={styles.signInButton}
                     size={GoogleSigninButton.Size.Wide}
                     color={GoogleSigninButton.Color.Dark}
                     onPress={() => {
-                        // navigation.navigate('Tasks')
                         onGoogleButtonPress();
-                        // signIn();
                     }}
-                // disabled={this.state.isSigninInProgress}
                 />
             </View>
         </>
@@ -122,16 +88,14 @@ export default connect(
 )(SignIn);
 
 const styles = StyleSheet.create({
-    viewPlus: {
-        marginLeft: '76%',
-        backgroundColor: 'transparent'
-    },
-
-    gradient: {
-        borderRadius: 30,
+    view: {
+        alignSelf: 'center',
         justifyContent: 'center',
-        alignContent: 'center',
-        margin: 'auto'
-
+        height: Dimensions.get('window').height - 100,
+    },
+    signInButton: {
+        width: 192,
+        height: 48,
+        alignSelf: 'center'
     }
 })

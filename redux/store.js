@@ -2,7 +2,6 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import UserReducer from './reducers/user.reducer';
 import TaskReducer from './reducers/tasks.reducer';
 import {
-    saveFcmToken,
     getUser
 } from './applyMiddleware/crud.user';
 import {
