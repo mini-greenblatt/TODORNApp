@@ -1,9 +1,7 @@
 import React, {
     useEffect,
-    useState
 } from 'react';
 import {
-    Content,
     View
 } from 'native-base';
 import {
@@ -16,34 +14,23 @@ import {
 } from 'react-redux';
 import actions from '../../../redux/actions'
 import TaskItem from './TaskItem'
-// import TaskItem from '../../../item'
 
 function TasksList(props) {
     const {
         tasks,
         getTasks
     } = props;
+
     const renderItem = ({ item }) => (
         <TaskItem task={item} key={item.id}></TaskItem>
     )
-    // useEffect(() => {
-    //     // alert('tasks',tasks)
-    //     console.log(tasks,'tas')
-    //     if (tasks.length <= 0) {
-    //     //     debugger
-    //         getTasks();
-    //     //     alert('hi',tasks.length)
-    //     }
 
-    // }, [tasks])
     useEffect(() => {
-        //get all groups
+        //get all tasks
         if (tasks.length <= 0) {
             props.getTasks();
         }
-    }, [
-        props.tasks
-    ])
+    }, [ props.tasks])
     
     return (
         <>
@@ -56,8 +43,6 @@ function TasksList(props) {
                         <FlatList
                             data={tasks}
                             renderItem={renderItem}
-                                                    // keyExtractor={(item, index) => index.toString()}
-// 
                             keyExtractor={item => item.id}
                              />
                     </View>
@@ -81,6 +66,7 @@ export default connect(
         }
     }
 )(TasksList);
+
 const styles = StyleSheet.create({
     txt: {
         marginLeft: 30,

@@ -27,10 +27,11 @@ function SignIn(props) {
 
     const [loggedIn, setloggedIn] = useState(false);
     const [userInfo, setUserInfo] = useState([]);
-
+    const [signinInProgress,isSigninInProgress]=useState(false)
     useEffect(() => {
         GoogleSignin.configure({
-            webClientId: '688579938286-9akgmcg4vapp4p9i0s6vmcgga2uq5291.apps.googleusercontent.com'
+            webClientId:'688579938286-tvrvonnqqtjl5o0p6oh0dms2egpfch9m.apps.googleusercontent.com'
+            // webClientId: '688579938286-9akgmcg4vapp4p9i0s6vmcgga2uq5291.apps.googleusercontent.com'
         });
 
         props.resetRedux();
@@ -38,16 +39,36 @@ function SignIn(props) {
 
     const onGoogleButtonPress = async () => {
         try {
-            navigation.navigate('Tasks')
+            debugger
 
             // await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             if (userInfo) {
                 const { accessToken } = await GoogleSignin.getTokens();
+                
 
             }
         }
-        catch (err) { }
+        catch (error) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                alert('user cancel')
+                // user cancelled the login flow
+              } else if (error.code === statusCodes.IN_PROGRESS) {
+                alert('is in progress already')
+
+                // operation (e.g. sign in) is in progress already
+              } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                alert('play services not available or outdated')
+
+                // play services not available or outdated
+              } else {
+                //   alert(error.code)
+                // some other error happened
+              }
+              navigation.navigate('Tasks')
+
+
+         }
     }
 
     return (
@@ -58,6 +79,7 @@ function SignIn(props) {
                     style={styles.signInButton}
                     size={GoogleSigninButton.Size.Wide}
                     color={GoogleSigninButton.Color.Dark}
+                    disabled={signinInProgress}
                     onPress={() => {
                         onGoogleButtonPress();
                     }}

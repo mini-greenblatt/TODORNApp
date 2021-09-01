@@ -2,25 +2,15 @@ import React, { useEffect, useState } from 'react';
 import {
     Text,
     View,
-    Body,
-    Left, Row, Col,
-    // ListItem, Title,
-    Right,
-    List,
-    Box,
-    HStack,
-    Checkbox,
-    IconButton,
-    Icon
+    Row,
 } from 'native-base';
 import {
-    Button,
     StyleSheet,
-    Switch, ListItem, Avatar, Touchable, TouchableOpacity
+    Switch,
+    TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../../../redux/actions';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 function TaskItem(props) {
 
@@ -43,10 +33,10 @@ function TaskItem(props) {
         let updateTask = {};
         debugger
         updateTask.completed = task.item.completed;
-        updateTask.auther=task.item.auther;
+        updateTask.auther = task.item.auther;
         updateTask.dateCompleted = task.item.dateCompleted;
         updateTask.title = task.item.title;
-        console.log('key',key)
+        console.log('key', key)
         updateTask.id = key;
         console.log('updatetask', updateTask)
         props.deleteTask(updateTask)
@@ -61,14 +51,29 @@ function TaskItem(props) {
                 <View >
                     <Row
                         style={{ alignItems: 'center' }}                    >
-                        <Text style={styles.text}>{task.item.title}</Text>
-                        <Button title='Edit' color='grey'
-                            style={{ position: 'relative' }}
-                        />
-                        <Button title='Delete' color='red'
+                        <Text style={styles.text} >{task.item.title}</Text>
+                        <TouchableOpacity style={
+                            [styles.buttons],
+                            {
+                                position: 'absolute',
+                                right: 60
+                            }}>
+
+                            <Text style={{ color: 'red' }}>Edit</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
                             onPress={() => {
                                 deleteTask()
-                            }} />
+                            }}
+                            style={
+                                [styles.buttons],
+                                {
+                                    position: 'absolute',
+                                    right: 100
+                                }}>
+                            <Text style={{ color: '#47316a' }}>Delete</Text>
+                        </TouchableOpacity>
+
                         <Switch
                             trackColor={{ false: '#3e3e3e', true: '#8978a4eb' }}
                             ios_backgroundColor="#3e3e3e"
@@ -122,6 +127,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         alignSelf: 'center'
+    },
+    buttons: {
+        borderColor: 'grey',
+        borderWidth: 1,
+        borderRadius: 5,
+        margin: 5,
+        padding: 2,
     }
 
 });

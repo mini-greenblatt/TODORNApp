@@ -30,13 +30,7 @@ import AddTaskModal from './AddTaskModal'
 import PlusIcon from '../../../src/assets/icons8-plus-+.svg';
 import Drawer from 'react-native-drawer'
 
-// import {
-//     connect
-// } from 'react-redux'
-
 function Tasks(props) {
-    // const {
-    // } = props;
 
     const [isVisible, setIsVisible] = useState(false)
 
@@ -63,7 +57,7 @@ function Tasks(props) {
                     onPress={() => {
                         setIsVisible(true)
                     }}
-                 >
+                 ><Text>Add Task</Text>
                 {/* <PlusIcon></PlusIcon> */}
                     {/* <Icon name="rocket" size={30} color="#900" /> */}
 
@@ -73,30 +67,8 @@ function Tasks(props) {
     )
 }
 export default Tasks;
-// (
-//     (state) => {
-//         return {
-//         }
-//     },
-//     (dispatch) => {
-//         return {
-//             resetRedux: function () {
-//                 dispatch(actions.reset())
-//             },
 
-
-//         }
-//     }
-// )(Tasks);
 const styles = StyleSheet.create({
-    nameLabel: {
-        width: '80%',
-        alignSelf: 'center',
-        borderRadius: 2,
-        paddingStart: 10,
-        minWidth: Dimensions.get('window').width - 100,
-
-    },
     item: {
         width: '90%',
         alignSelf: 'center',
@@ -115,35 +87,7 @@ const styles = StyleSheet.create({
         marginLeft: '8%'
 
     },
-    centeredView: {
-        flex: 1,
-        justifyContent: "flex-end",
-        backgroundColor: 'transparent',
-        width: Dimensions.get('window').width - 50,
-        height: Dimensions.get('window').height / 2,
-        alignContent: 'center',
-        borderTopColor: 'pink',
-        borderTopWidth: 10,
-
-    },
-    modalView: {
-        alignSelf: 'center',
-        backgroundColor: "white",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 15,
-        elevation: 5,
-        width: Dimensions.get('window').width - 50,
-        height: Dimensions.get('window').height / 3,
-        marginTop: Dimensions.get('window').height / 4,
-        borderColor: '#845cc3',
-        borderWidth: 2,
-        borderRadius: 10,
-    },
+   
     plusButton: {
         borderWidth: 1,
         borderColor: 'rgba(0,0,0,0.2)',

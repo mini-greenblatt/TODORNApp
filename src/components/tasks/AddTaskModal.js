@@ -1,34 +1,17 @@
 import React, {
     useState,
-    useEffect
 } from 'react';
 import {
-    Button,
     Text,
-    TextInput,
-    TouchableOpacity,
     TouchableHighlight,
-    Root,
     StyleSheet,
-    Modal,
     Dimensions,
     View,
 } from 'react-native'
 import {
-    Container,
-    Item,
-    // Button,
     Input
 } from 'native-base';
 import actions from '../../../redux/actions'
-import { NativeBaseProvider } from 'native-base';
-
-import HeaderTasks from './HeaderTasks'
-import TasksList from './TasksList'
-// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-// import Icon from 'react-native-vector-icons/FontAwesome5';
-import Plus from 'react-native-vector-icons/FontAwesome5';
-import AsyncStorage from '../../../services/asyncStorge'
 import {
     connect
 } from 'react-redux'
@@ -37,10 +20,6 @@ function AddTaskModal(props) {
     const {
         addTask,
         setIsVisible,
-        isVisible
-        // setFormValuesFunction,
-        // formValues
-
     } = props;
 
     const [formValues, setFormValues] = useState({
@@ -91,10 +70,6 @@ function AddTaskModal(props) {
                         underlayColor='#fff'>
                         <Text style={{ color: 'black', fontWeight: 'bold' }}>Ok</Text>
                     </TouchableHighlight>
-                    {/* //of native base */}
-                    {/* <Button size="sm" onPress={() => console.log("hello world")}>
-          PRIMARY
-        </Button> */}
                 </View>
             </View>
 
@@ -141,17 +116,6 @@ const styles = StyleSheet.create({
         marginLeft: '8%'
 
     },
-    centeredView: {
-        flex: 1,
-        justifyContent: "flex-end",
-        backgroundColor: 'transparent',
-        width: Dimensions.get('window').width - 50,
-        height: Dimensions.get('window').height / 2,
-        alignContent: 'center',
-        borderTopColor: 'pink',
-        borderTopWidth: 10,
-
-    },
     modalView: {
         alignSelf: 'center',
         backgroundColor: "white",
@@ -169,19 +133,6 @@ const styles = StyleSheet.create({
         borderColor: '#845cc3',
         borderWidth: 2,
         borderRadius: 10,
-    },
-    plusButton: {
-        borderWidth: 1,
-        borderColor: 'rgba(0,0,0,0.2)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 70,
-        position: 'absolute',
-        bottom: 10,
-        right: 10,
-        height: 70,
-        backgroundColor: '#fff',
-        borderRadius: 100
     },
     cancelBtn: {
         alignContent: 'center',
